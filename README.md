@@ -53,7 +53,7 @@ Feedback and suggestions are welcome!
 
 ## 📬 Connect with Me
 
-- 💼 [LinkedIn](https://www.linkedin.com/public-profile/settings?trk=d_flagship3_profile_self_view_public_profile) *(Add your profile link)*
+- 💼 [LinkedIn](https://www.linkedin.com/public-profile/settings?trk=d_flagship3_profile_self_view_public_profile)
 - 📧 Email: ritwiksai0319@gmail.com
 
 ---
