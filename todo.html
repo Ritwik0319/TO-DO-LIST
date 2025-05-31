@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 50px 20px;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        #btn {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+            margin-bottom: 20px;
+        }
+
+        #btn:hover {
+            background-color: #0056b3;
+        }
+
+        ul {
+            list-style: none;
+            width: 100%;
+            max-width: 600px;
+            padding: 0;
+        }
+
+        li {
+            background-color: white;
+            padding: 12px 15px;
+            margin: 10px 0;
+            border-radius: 6px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .task-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        button.task-btn,
+        .task-buttons {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .complete {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .edit {
+            background-color: #ffc107;
+            color: black;
+        }
+
+        .delete {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        @media (max-width: 500px) {
+            li {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .task-buttons {
+                width: 100%;
+                justify-content: flex-start;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>TO_DO LIST</h1>
+    <div>
+        <!-- Button to add new task -->
+        <button onclick="addlist()" id="btn">ADD LIST</button>
+        <!-- List where tasks will be appended -->
+        <ul id="list"></ul>
+    </div>
+    <script>
+        function addlist() {
+            let ul = document.getElementsByTagName("ul")[0]  // Get the first <ul> element
+            let u_task = prompt("Enter your task: ")  // Ask user for task input
+            u_task = u_task.trim()                    // Remove spaces from both ends
+
+            if (u_task !== "") {
+                // Create the <li> element with task text
+                let li = document.createElement("li")
+                li.innerText = u_task
+
+                // Create a container for task buttons
+                let btn_container = document.createElement("div")
+                btn_container.classList.add("task-buttons")
+
+                // Create 'completed' button
+                let cancle_btn = document.createElement("button")
+                cancle_btn.innerHTML = "completed"
+                cancle_btn.classList.add("task-buttons", "complete")
+
+                // Create 'edit' button
+                let edit_btn = document.createElement("button")
+                edit_btn.innerHTML = "edit"
+                edit_btn.classList.add("task-buttons", "edit")
+
+                // Create 'delete' button
+                let delete_btn = document.createElement("button")
+                delete_btn.innerHTML = "delete"
+                delete_btn.classList.add("task-buttons", "delete")
+
+
+                // Add event listener to strike through task on completion
+                cancle_btn.addEventListener("click", () => { handlechange(li) })
+
+                // Add event listener to edit task
+                edit_btn.addEventListener("click", () => { handleedit(li) })
+
+                // Add event listener to delete task and buttons
+                delete_btn.addEventListener("click", () => { handledelete(li, cancle_btn, edit_btn, delete_btn) })
+
+                // Append the <li> and buttons to the list
+                ul.append(li)
+                ul.append(btn_container)
+                btn_container.append(cancle_btn, edit_btn, delete_btn)
+
+            }
+        }
+        // Function to mark task as completed
+        function handlechange(params) {
+            // console.log(params);
+            params.style.textDecoration = "line-through";
+            params.style.color = "red";
+        }
+        // Function to edit the task content
+        function handleedit(li) {
+            let edit_inp = prompt("enter new text", li.innerText)
+            li.innerText = edit_inp
+        }
+        // Function to remove the task and its buttons
+        function handledelete(li, cancle_btn, edit_btn, delete_btn) {
+            li.remove()
+            cancle_btn.remove()
+            edit_btn.remove()
+            delete_btn.remove()
+        }
+    </script>
+</body>
+
+</html>
